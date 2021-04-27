@@ -13,33 +13,29 @@
 
 #pragma once
 
-#include <memory>
-#include <mutex>
-#include <typeinfo>
-#include <vector>
-
-/* Util */
-#include "KeypleUtilExport.h"
-#include "Logger.h"
+#include "Exception.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
+namespace exception {
 
-class KEYPLEUTIL_API LoggerFactory {
+class ClassNotFoundException : public Exception {
 public:
     /**
-     * Mutex for critical sections (std::cout usage)
+     *
      */
-    static std::mutex mtx;
+    ClassNotFoundException(const std::string& message) : Exception(message) {}
 
     /**
      *
      */
-    static std::unique_ptr<Logger> getLogger(const std::type_info& type);
+    ClassNotFoundException(const std::string& message, const std::exception cause)
+    : Exception(message, cause) {}
 };
 
+}
 }
 }
 }

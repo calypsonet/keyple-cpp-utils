@@ -11,34 +11,33 @@
  * SPDX-License-Identifier: EPL-2.0                                                               *
  **************************************************************************************************/
 
-#pragma once
-
-#include <memory>
-#include <mutex>
-#include <typeinfo>
-#include <vector>
-
-/* Util */
-#include "KeypleUtilExport.h"
-#include "Logger.h"
+#include "Pattern.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
 
-class KEYPLEUTIL_API LoggerFactory {
-public:
-    /**
-     * Mutex for critical sections (std::cout usage)
-     */
-    static std::mutex mtx;
+Pattern::Pattern(const std::string& pattern, const int flags) : mPattern(pattern), mFlags(flags) {}
 
-    /**
-     *
-     */
-    static std::unique_ptr<Logger> getLogger(const std::type_info& type);
-};
+std::unique_ptr<Pattern> Pattern::compile(const std::string& regularExpression, const int flags)
+    const
+{
+    /* Compiler hack */
+    (void)mFlags;
+
+    return std::unique_ptr<Pattern>(new Pattern(regularExpression, flags));
+}
+
+std::unique_ptr<Pattern> Pattern::compile(const std::string& pattern)
+{
+    return std::unique_ptr<Pattern>(new Pattern(pattern, 0));
+}
+
+std::unique_ptr<Matcher> Pattern::matcher(const std::string& input) const
+{
+    return std::unique_ptr<Matcher>(new Matcher(this, input));
+}
 
 }
 }

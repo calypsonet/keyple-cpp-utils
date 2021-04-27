@@ -20,9 +20,9 @@ namespace cpp {
 
 std::mutex LoggerFactory::mtx;
 
-std::shared_ptr<Logger> LoggerFactory::getLogger(const std::type_info& type)
+std::unique_ptr<Logger> LoggerFactory::getLogger(const std::type_info& type)
 {
-    return std::make_shared<Logger>(type.name(), &mtx);
+    return std::unique_ptr<Logger>(new Logger(type.name(), &mtx));
 }
 
 }

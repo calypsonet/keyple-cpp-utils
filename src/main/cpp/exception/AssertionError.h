@@ -13,33 +13,28 @@
 
 #pragma once
 
-#include <memory>
-#include <mutex>
-#include <typeinfo>
-#include <vector>
-
-/* Util */
-#include "KeypleUtilExport.h"
-#include "Logger.h"
+#include "Error.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
+namespace exception {
 
-class KEYPLEUTIL_API LoggerFactory {
+class AssertionError : public Error {
 public:
     /**
-     * Mutex for critical sections (std::cout usage)
+     *
      */
-    static std::mutex mtx;
+    AssertionError() : Error() {}
 
     /**
      *
      */
-    static std::unique_ptr<Logger> getLogger(const std::type_info& type);
+    AssertionError(const std::string& msg) : Error(msg) {}
 };
 
+}
 }
 }
 }

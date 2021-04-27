@@ -13,31 +13,53 @@
 
 #pragma once
 
-#include <memory>
-#include <mutex>
-#include <typeinfo>
-#include <vector>
+#include <string>
 
-/* Util */
 #include "KeypleUtilExport.h"
-#include "Logger.h"
+#include "Matcher.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
 
-class KEYPLEUTIL_API LoggerFactory {
+class KEYPLEUTIL_API Pattern {
 public:
     /**
-     * Mutex for critical sections (std::cout usage)
+     *
      */
-    static std::mutex mtx;
+    const std::regex mPattern;
+
+    /**
+     * Constructor
+     */
+    Pattern(const std::string& pattern, const int flags);
+
+    /**
+     * Returns a compiled form of the given regular expression, as modified by the given flags.
+     *
+     * @throws PatternSyntexException
+     */
+    std::unique_ptr<Pattern> compile(const std::string& regularExpression, const int flags) const;
+
+    /**
+     * Equivalent to Pattern.compile(pattern, 0)
+     */
+    static std::unique_ptr<Pattern> compile(const std::string& pattern);
+
+    /*
+     * Returns a Matcher for this pattern applied to the given input. The Matcher can be used to
+     * match the Pattern against the whole input, find occurences of the Pattern in the input, or
+     * replace parts of the input.
+     */
+    std::unique_ptr<Matcher> matcher(const std::string& input) const;
+
+private:
 
     /**
      *
      */
-    static std::unique_ptr<Logger> getLogger(const std::type_info& type);
+    const int mFlags;
 };
 
 }

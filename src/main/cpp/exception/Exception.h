@@ -13,33 +13,76 @@
 
 #pragma once
 
-#include <memory>
-#include <mutex>
-#include <typeinfo>
-#include <vector>
-
-/* Util */
-#include "KeypleUtilExport.h"
-#include "Logger.h"
+#include <exception>
+#include <stdexcept>
+#include <iostream>
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
+namespace exception {
 
-class KEYPLEUTIL_API LoggerFactory {
+class Exception : public std::exception {
 public:
     /**
-     * Mutex for critical sections (std::cout usage)
+     *
      */
-    static std::mutex mtx;
+    Exception() {}
 
     /**
      *
      */
-    static std::unique_ptr<Logger> getLogger(const std::type_info& type);
+    Exception(const std::string& message) : mMessage(message) {}
+
+    /**
+     *
+     */
+    Exception(const std::string& message, const std::exception cause)
+    : mMessage(message), mCause(cause) {}
+
+    /**
+     * Returns the detail message string of this exception.
+     */
+    const std::string& getMessage() const
+    {
+        return mMessage;
+    }
+
+    /**
+     * Returns the cause of the exception.
+     */
+    const std::exception& getCause() const
+    {
+        return mCause;
+    }
+
+    /**
+     *
+     */
+    friend std::ostream& operator<<(std::ostream& os, const Exception& e)
+    {
+       os << "EXCEPTION: {"
+           << "MESSAGE = " << e.mMessage << ", "
+           << "CAUSE = " << e.mCause.what()
+           << "}";
+
+        return os;
+    }
+
+private:
+    /**
+     *
+     */
+    const std::string mMessage;
+
+    /**
+     *
+     */
+    const std::exception mCause;
 };
 
+}
 }
 }
 }
