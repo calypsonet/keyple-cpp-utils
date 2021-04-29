@@ -42,6 +42,7 @@ ADD_LIBRARY(
 
     ${LIBRARY_TYPE}
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/ByteArrayUtil.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/Logger.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/LoggerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/Matcher.cpp
