@@ -11,6 +11,42 @@
 # SPDX-License-Identifier: EPL-2.0                                                                *
 # *************************************************************************************************/
 
-# Add projects
-ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/main/)
-ADD_SUBDIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/test/)
+PROJECT(KeypleUtilUT C CXX)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+SET(VERSION_MAJOR "2")
+SET(VERSION_MINOR "0")
+SET(VERSION_PATCH "0")
+
+SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
+
+SET(PACKAGE_NAME "KeypleUtilUT")
+SET(PACKAGE_VERSION ${VERSION})
+SET(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
+
+SET(CMAKE_MACOSX_RPATH 1)
+SET(CMAKE_CXX_STANDARD 11)
+
+SET(EXECUTABLE_NAME keypleutilut)
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DKEYPLEUTIL_EXPORT")
+
+INCLUDE_DIRECTORIES(
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}/../main
+    ${CMAKE_CURRENT_SOURCE_DIR}/../main/bertlv
+    ${CMAKE_CURRENT_SOURCE_DIR}/../main/cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/../main/cpp/exception
+)
+
+ADD_EXECUTABLE(
+    ${EXECUTABLE_NAME}
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/ApduUtilTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/ByteArrayUtilTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/MainTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/bertlv/TagTest.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/bertlv/TLVTest.cpp
+)
+
+TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} gtest gmock keypleutil)

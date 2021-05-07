@@ -42,7 +42,10 @@ ADD_LIBRARY(
 
     ${LIBRARY_TYPE}
 
+    ${CMAKE_CURRENT_SOURCE_DIR}/ApduUtil.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/ByteArrayUtil.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/bertlv/Tag.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/bertlv/TLV.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/Logger.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/LoggerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/Matcher.cpp

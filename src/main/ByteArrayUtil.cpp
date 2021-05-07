@@ -58,7 +58,7 @@ const std::string ByteArrayUtil::OFFSET = "offset";
 
 bool ByteArrayUtil::isValidHexString(const std::string& hexString)
 {
-    if (hexString != "") {
+    if (hexString != "" && (hexString.length() % 2 == 0)) {
         return hexString.find_first_not_of("0123456789abcdefABCDEF") == std::string::npos;
     } else {
         return false;
