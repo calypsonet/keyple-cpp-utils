@@ -49,4 +49,4 @@ ADD_EXECUTABLE(
     ${CMAKE_CURRENT_SOURCE_DIR}/bertlv/TLVTest.cpp
 )
 
-TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} gtest gmock keypleutil)
+TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} gtest gmock keypleutilcpplib)
