@@ -11,7 +11,7 @@
 # SPDX-License-Identifier: EPL-2.0                                                                *
 # *************************************************************************************************/
 
-PROJECT(KeypleUtilUT C CXX)
+PROJECT(KeypleUtil C CXX)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 
 SET(VERSION_MAJOR "2")
@@ -20,14 +20,14 @@ SET(VERSION_PATCH "0")
 
 SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
 
-SET(PACKAGE_NAME "KeypleUtilUT")
+SET(PACKAGE_NAME "KeypleUtil")
 SET(PACKAGE_VERSION ${VERSION})
 SET(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
 
 SET(CMAKE_MACOSX_RPATH 1)
 SET(CMAKE_CXX_STANDARD 11)
 
-SET(EXECUTABLE_NAME keypleutilut)
+SET(EXECUTABLE_NAME keypleutil_ut)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DKEYPLEUTIL_EXPORT")
 

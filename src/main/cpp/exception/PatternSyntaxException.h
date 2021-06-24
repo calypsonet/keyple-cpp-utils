@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "Exception.h"
+#include "IllegalArgumentException.h"
 
 namespace keyple {
 namespace core {
@@ -20,18 +20,18 @@ namespace util {
 namespace cpp {
 namespace exception {
 
-class NoSuchElementException : public Exception {
+class PatternSyntaxException : public IllegalArgumentException {
 public:
     /**
      *
      */
-    NoSuchElementException(const std::string& message) : Exception(message) {}
+    PatternSyntaxException(const std::string& message) : IllegalArgumentException(message) {}
 
     /**
      *
      */
-    NoSuchElementException(const std::string& message, const std::exception cause)
-    : Exception(message, cause) {}
+    PatternSyntaxException(const std::string& message, const std::exception cause)
+    : IllegalArgumentException(message, cause) {}
 };
 
 }

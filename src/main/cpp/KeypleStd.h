@@ -1,6 +1,5 @@
 /**************************************************************************************************
- * Copyright (c) 2021 Calypso Networks Association                                                *
- * https://www.calypsonet-asso.org/                                                               *
+ * Copyright (c) 2021 Calypso Networks Association https://calypsonet.org/                        *
  *                                                                                                *
  * See the NOTICE file(s) distributed with this work for additional information regarding         *
  * copyright ownership.                                                                           *
@@ -44,6 +43,15 @@ inline std::ostream& operator<<(std::ostream& os, const std::vector<uint8_t>& v)
 {
     for (int i = 0; i < static_cast<int>(v.size()); i++)
         os << std::hex << std::setfill('0') << std::setw(2)
+           << static_cast<int>(v[i]);
+
+    return os;
+}
+
+inline std::ostream& operator<<(std::ostream& os, const std::vector<int>& v)
+{
+    for (int i = 0; i < static_cast<int>(v.size()); i++)
+        os << std::hex << std::setfill('0') << std::setw(8)
            << static_cast<int>(v[i]);
 
     return os;
