@@ -30,7 +30,7 @@ public:
     /**
      *
      */
-    IllegalArgumentException(const std::string& message, const std::exception cause)
+    IllegalArgumentException(const std::string& message, const std::shared_ptr<Exception> cause)
     : Exception(message, cause) {}
 };
 

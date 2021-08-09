@@ -32,12 +32,12 @@ public:
     /**
      *
      */
-    Exception(const std::string& message) : mMessage(message) {}
+    Exception(const std::string& message) : mMessage(message), mCause(nullptr) {}
 
     /**
      *
      */
-    Exception(const std::string& message, const std::exception cause)
+    Exception(const std::string& message, const std::shared_ptr<Exception> cause)
     : mMessage(message), mCause(cause) {}
 
     /**
@@ -51,7 +51,7 @@ public:
     /**
      * Returns the cause of the exception.
      */
-    const std::exception& getCause() const
+    const std::shared_ptr<Exception> getCause() const
     {
         return mCause;
     }
@@ -63,10 +63,19 @@ public:
     {
        os << "EXCEPTION: {"
            << "MESSAGE = " << e.mMessage << ", "
-           << "CAUSE = " << e.mCause.what()
+           << "CAUSE = " << e.mCause->what()
            << "}";
 
         return os;
+    }
+
+    /**
+     *
+     */
+    bool operator==(const Exception& o) const
+    {
+        return mMessage == o.mMessage &&
+               mCause== o.mCause;
     }
 
 private:
@@ -78,7 +87,7 @@ private:
     /**
      *
      */
-    const std::exception mCause;
+    const std::shared_ptr<Exception> mCause;
 };
 
 }

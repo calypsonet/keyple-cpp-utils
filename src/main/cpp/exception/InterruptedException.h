@@ -30,7 +30,7 @@ public:
     /**
      *
      */
-    InterruptedException(const std::string& name, const std::exception& cause)
+    InterruptedException(const std::string& name, const std::shared_ptr<Exception> cause)
     : Exception(name, cause) {}
 };
 

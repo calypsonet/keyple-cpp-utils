@@ -12,6 +12,8 @@
 
 #pragma once
 
+#include <algorithm>
+#include <string>
 #include <vector>
 #include <iostream>
 
@@ -95,6 +97,14 @@ public:
         std::copy(original.begin() + from, original.begin() + to, std::back_inserter(vec));
 
         return vec;
+    }
+
+    static bool containsAll(std::vector<std::string> a, std::vector<std::string> b)
+    {
+        std::sort(a.begin(), a.end());
+        std::sort(b.begin(), b.end());
+
+        return std::includes(a.begin(), a.end(), b.begin(), b.end());
     }
 };
 

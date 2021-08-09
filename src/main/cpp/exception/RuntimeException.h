@@ -25,12 +25,17 @@ public:
     /**
      *
      */
+    RuntimeException() : Exception() {}
+
+    /**
+     *
+     */
     RuntimeException(const std::string& message) : Exception(message) {}
 
     /**
      *
      */
-    RuntimeException(const std::string& message, const std::exception cause)
+    RuntimeException(const std::string& message, const std::shared_ptr<Exception> cause)
     : Exception(message, cause) {}
 };
 

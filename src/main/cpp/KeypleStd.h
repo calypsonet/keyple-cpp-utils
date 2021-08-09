@@ -57,6 +57,20 @@ inline std::ostream& operator<<(std::ostream& os, const std::vector<int>& v)
     return os;
 }
 
+inline std::ostream& operator<<(std::ostream& os, const std::vector<std::string>& v)
+{
+    os << "{";
+    for (auto it = v.begin(); it != v.end(); ++it)
+    {
+        if (it != v.begin())
+            os << ", ";
+        os << *it;
+    }
+    os << "}";
+
+    return os;
+}
+
 inline std::ostream& operator<<(std::ostream& os, const std::set<std::string>& s)
 {
     os << "{";

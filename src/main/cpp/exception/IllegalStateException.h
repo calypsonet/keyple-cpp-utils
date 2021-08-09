@@ -30,7 +30,7 @@ public:
     /**
      *
      */
-    IllegalStateException(const std::string& message, const std::exception cause)
+    IllegalStateException(const std::string& message, const std::shared_ptr<Exception> cause)
     : Exception(message, cause) {}
 };
 
