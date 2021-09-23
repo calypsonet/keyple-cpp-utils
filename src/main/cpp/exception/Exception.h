@@ -13,6 +13,7 @@
 #pragma once
 
 #include <exception>
+#include <memory>
 #include <stdexcept>
 #include <iostream>
 

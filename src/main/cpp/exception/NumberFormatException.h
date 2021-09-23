@@ -35,7 +35,7 @@ public:
     /**
      *
      */
-    NumberFormatException(const std::string& message, const std::exception cause)
+    NumberFormatException(const std::string& message, const std::shared_ptr<Exception> cause)
     : Exception(message, cause) {}
 };
 

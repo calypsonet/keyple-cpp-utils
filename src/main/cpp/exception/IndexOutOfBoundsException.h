@@ -30,7 +30,7 @@ public:
     /**
      *
      */
-    IndexOutOfBoundsException(const std::string& message, const std::exception cause)
+    IndexOutOfBoundsException(const std::string& message, const std::shared_ptr<Exception> cause)
     : Exception(message, cause) {}
 };
 

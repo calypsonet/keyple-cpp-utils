@@ -15,8 +15,10 @@
 #include <memory>
 #include <iomanip>
 #include <iostream>
+#include <iterator>
 #include <map>
 #include <ostream>
+#include <regex>
 #include <set>
 #include <vector>
 
@@ -99,5 +101,17 @@ std::ostream& operator<<(std::ostream& os, const std::map<const std::string, con
 
     return os;
 }
+
+template <typename out>
+inline void split(const std::string &s, const std::regex& re, out result)
+{
+    std::sregex_token_iterator d(s.begin(), s.end(), re, -1);
+    std::sregex_token_iterator end;
+
+    while (d != end) {
+        *result++ = *d++;
+    }
+}
+
 
 }
