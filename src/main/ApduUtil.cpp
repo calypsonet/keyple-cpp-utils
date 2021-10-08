@@ -44,8 +44,8 @@ const std::vector<uint8_t> ApduUtil::build(const uint8_t cla,
     /* ISO7618 case determination and Le management */
     if (dataIn.size() != 0) {
         /* Append Lc and ingoing data */
-        apduCommand[4] = dataIn.size();
-        System::arraycopy(dataIn, 0, apduCommand, 5, dataIn.size());
+        apduCommand[4] = static_cast<uint8_t>(dataIn.size());
+        System::arraycopy(dataIn, 0, apduCommand, 5, static_cast<int>(dataIn.size()));
         apduCommand[apduCommand.size() - 1] = le;
     } else {
         /* Case2: outgoing data only */
@@ -75,8 +75,8 @@ const std::vector<uint8_t> ApduUtil::build(const uint8_t cla,
     /* ISO7618 case determination and Le management */
     if (dataIn.size() != 0) {
         /* append Lc and ingoing data */
-        apduCommand[4] = dataIn.size();
-        System::arraycopy(dataIn, 0, apduCommand, 5, dataIn.size());
+        apduCommand[4] = static_cast<uint8_t>(dataIn.size());
+        System::arraycopy(dataIn, 0, apduCommand, 5, static_cast<int>(dataIn.size()));
         /* Case3: ingoing data only, no Le */
     } else {
         /* Case1: no ingoing, no outgoing data, P3/Le = 0 */
@@ -136,19 +136,19 @@ std::vector<uint8_t> ApduUtil::allocateBuffer(const std::vector<uint8_t>& data, 
 {
     (void)le;
 
-    int length = 4;            // Header
+    int length = 4;                              // Header
 
-    length += data.size() + 1; // Lc + data
-    length += 1;               // Le
+    length += static_cast<int>(data.size() + 1); // Lc + data
+    length += 1;                                 // Le
 
     return std::vector<uint8_t>(length);
 }
 
 std::vector<uint8_t> ApduUtil::allocateBuffer(const std::vector<uint8_t>& data)
 {
-    int length = 4;            // Header
+    int length = 4;                              // Header
 
-    length += data.size() + 1; // Lc + data
+    length += static_cast<int>(data.size() + 1); // Lc + data
 
     return std::vector<uint8_t>(length);
 }

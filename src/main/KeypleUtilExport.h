@@ -13,7 +13,7 @@
 #pragma once
 
 #if defined(WIN32)
-#if defined(KEYPLEUTIL_API)
+#if defined(KEYPLEUTIL_EXPORT)
 #define KEYPLEUTIL_API __declspec(dllexport)
 #else
 #define KEYPLEUTIL_API __declspec(dllimport)

@@ -113,7 +113,7 @@ bool Matcher::search(const int from)
 
 int Matcher::getTextLength() const
 {
-    return mText.length();
+    return static_cast<int>(mText.length());
 }
 
 Matcher* Matcher::reset()
