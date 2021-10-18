@@ -102,6 +102,21 @@ std::ostream& operator<<(std::ostream& os, const std::map<const std::string, con
     return os;
 }
 
+inline
+std::ostream& operator<<(std::ostream& os, const std::map<std::string, std::string>& s)
+{
+    os << "MAP: {";
+    for (auto it = s.begin(); it != s.end(); ++it)
+    {
+        if (it != s.begin())
+            os << ", ";
+        os << "{" << it->first << ", " << it->second << "}";
+    }
+    os << "}";
+
+    return os;
+}
+
 template <typename out>
 inline void split(const std::string &s, const std::regex& re, out result)
 {
