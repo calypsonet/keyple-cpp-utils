@@ -1,8 +1,8 @@
-# Keyple C++ Utils
+# Keyple C++ Util
 
 ## Overview
 
-The **Keyple Utils** C++ library contains various utilities classes.
+The **Keyple Util** C++ library contains various utilities classes.
 
 This library **should not be imported explicitly** because it's imported by transitivity by the main libraries.
 
