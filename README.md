@@ -1,4 +1,4 @@
-# Keyple C++ Util
+# Keyple Util C++ Library
 
 ## Overview
 
@@ -9,6 +9,10 @@ This library **should not be imported explicitly** because it's imported by tran
 ## User Guide & Download Information
 
 The full documentation, including download information is available in the **Documentation** section of the official Keyple website [keyple.org](https://keyple.org)
+
+## Doxygen
+
+The doxygen is available online: [eclipse.github.io/keyple-util-cpp-lib/](https://eclipse.github.io/keyple-util-cpp-lib/)
 
 ## Build the Code
 
