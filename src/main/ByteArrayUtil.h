@@ -176,21 +176,6 @@ private:
     static const std::string HEXA_REGEX;
 
     /**
-     *
-     */
-    static const std::string BYTES;
-
-    /**
-     *
-     */
-    static const std::string LENGTH;
-
-    /**
-     *
-     */
-    static const std::string OFFSET;
-
-    /**
      * (private)
      */
     static void checkBytesToIntConversionParams(const int size,

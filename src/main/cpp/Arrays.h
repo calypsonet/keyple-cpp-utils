@@ -17,10 +17,15 @@
 #include <vector>
 #include <iostream>
 
+/* Keyple Core Util */
+#include "IndexOutOfBoundsException.h"
+
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
+
+using namespace keyple::core::util::cpp::exception;
 
 class Arrays {
 private:
@@ -79,10 +84,13 @@ public:
 
     static std::vector<char> copyOfRange(const std::vector<char>& original,
                                          const int from,
-                                         const  int to)
+                                         const int to)
     {
-        std::vector<char> vec;
+        if ((to - from) > static_cast<int>(original.size())) {
+            throw IndexOutOfBoundsException("index out of bound");
+        }
 
+        std::vector<char> vec;
         std::copy(original.begin() + from, original.begin() + to, std::back_inserter(vec));
 
         return vec;
@@ -92,8 +100,11 @@ public:
                                             const int from,
                                             const int to)
     {
-        std::vector<uint8_t> vec;
+        if ((to - from) > static_cast<int>(original.size())) {
+            throw IndexOutOfBoundsException("index out of bound");
+        }
 
+        std::vector<uint8_t> vec;
         std::copy(original.begin() + from, original.begin() + to, std::back_inserter(vec));
 
         return vec;
@@ -105,6 +116,17 @@ public:
         std::sort(b.begin(), b.end());
 
         return std::includes(a.begin(), a.end(), b.begin(), b.end());
+    }
+
+    static bool containsOnly(const std::vector<uint8_t>& vec, const uint8_t val)
+    {
+        for (const auto& v : vec) {
+            if (v != val) {
+                return false;
+            }
+        }
+
+        return true;
     }
 };
 

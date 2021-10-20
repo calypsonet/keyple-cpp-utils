@@ -51,9 +51,6 @@ const std::vector<std::string> ByteArrayUtil::byteToHex = {
 
 
 const std::string ByteArrayUtil::HEXA_REGEX("^([0-9a-fA-F][0-9a-fA-F])+$");
-const std::string ByteArrayUtil::BYTES = "bytes";
-const std::string ByteArrayUtil::LENGTH = "length";
-const std::string ByteArrayUtil::OFFSET = "offset";
 
 bool ByteArrayUtil::isValidHexString(const std::string& hexString)
 {
