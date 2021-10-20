@@ -22,7 +22,7 @@ namespace util {
 /**
  * Util to build APDUs and check case 4.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 class ApduUtil final {
 public:
@@ -37,7 +37,7 @@ public:
      * @param le The maximum number of bytes expected in the data field of the response to the command
      *     (optional).
      * @return A byte array containing the resulting apdu command data.
-     * @since 2.0
+     * @since 2.0.0
      */
     static const std::vector<uint8_t> build(const uint8_t cla,
                                             const uint8_t ins,
@@ -55,7 +55,7 @@ public:
      * @param p2 The parameter 2.
      * @param dataIn The data field of the command (optional).
      * @return A byte array containing the resulting apdu command data.
-     * @since 2.0
+     * @since 2.0.0
      */
     static const std::vector<uint8_t> build(const uint8_t cla,
                                             const uint8_t ins,
@@ -73,7 +73,7 @@ public:
      * @param le The maximum number of bytes expected in the data field of the response to the command
      *     (optional).
      * @return A byte array containing the resulting apdu command data.
-     * @since 2.0
+     * @since 2.0.0
      */
     static const std::vector<uint8_t> build(const uint8_t cla,
                                             const uint8_t ins,
@@ -89,7 +89,7 @@ public:
      * @param p1 The parameter 1.
      * @param p2 The parameter 2.
      * @return A byte array containing the resulting apdu command data.
-     * @since 2.0
+     * @since 2.0.0
      */
     static const std::vector<uint8_t> build(const uint8_t cla,
                                             const uint8_t ins,
@@ -155,7 +155,7 @@ public:
      *
      * @param apduCommand The apduCommand to check.
      * @return true the APDU command is case 4.
-     * @since 2.0
+     * @since 2.0.0
      */
     static bool isCase4(const std::vector<uint8_t>& apduCommand);
 

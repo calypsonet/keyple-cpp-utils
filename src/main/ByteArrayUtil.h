@@ -57,7 +57,7 @@ public:
      * @throw IllegalArgumentException If the provided string is null, empty or made of an odd
      *        number of characters.
      * @see #isValidHexString(String)
-     * @since 2.0
+     * @since 2.0.0
      */
     static std::vector<uint8_t> fromHex(const std::string& hex);
 
@@ -67,7 +67,7 @@ public:
      * @param byteArray The byte array to represent in hexadecimal.
      * @return An hexadecimal string representation of byteArray, an empty string of if the byte
      *         array is null.
-     * @since 2.0
+     * @since 2.0.0
      */
     static std::string toHex(const std::vector<char>& byteArray);
 
@@ -77,7 +77,7 @@ public:
      * @param byteArray The byte array to represent in hexadecimal.
      * @return An hexadecimal string representation of byteArray, an empty string of if the byte
      *         array is null.
-     * @since 2.0
+     * @since 2.0.0
      */
     static std::string toHex(const std::vector<uint8_t>& byteArray);
 
@@ -92,7 +92,7 @@ public:
      * @param offset The position of the 2 bytes in the array.
      * @return A positive int.
      * @throw IllegalArgumentException If the buffer has a bad length or the offset is negative.
-     * @since 2.0
+     * @since 2.0.0
      */
     static int twoBytesToInt(const std::vector<uint8_t>& bytes, const int offset);
 
@@ -111,7 +111,7 @@ public:
      * @param offset The position of the 2 bytes in the array.
      * @return A negative or positive int.
      * @throw IllegalArgumentException If the buffer has a bad length or the offset is negative.
-     * @since 2.0
+     * @since 2.0.0
      */
     static int twoBytesSignedToInt(const std::vector<uint8_t>& bytes, const int offset);
 
@@ -126,7 +126,7 @@ public:
      * @param offset The position of the 3 bytes in the array.
      * @return A positive int.
      * @throw IllegalArgumentException if the buffer has a bad length
-     * @since 2.0
+     * @since 2.0.0
      */
     static int threeBytesToInt(const std::vector<uint8_t>& bytes, const int offset);
 
@@ -145,7 +145,7 @@ public:
      * @param offset The position of the 3 bytes in the array.
      * @return A positive int.
      * @throw IllegalArgumentException if the buffer has a bad length
-     * @since 2.0
+     * @since 2.0.0
      */
     static int threeBytesSignedToInt(const std::vector<uint8_t>& bytes, const int offset);
 
@@ -160,7 +160,7 @@ public:
      * @param offset The position of the 4 bytes in the array.
      * @return A positive int.
      * @throw IllegalArgumentException if the buffer has a bad length
-     * @since 2.0
+     * @since 2.0.0
      */
     static int fourBytesToInt(const std::vector<uint8_t>& bytes, const int offset);
 

@@ -30,7 +30,7 @@ using namespace keyple::core::util::cpp::exception;
  * Exposes useful methods for testing method call parameters and raising a IllegalArgumentException
  * unchecked exception.
  *
- * @since 2.0
+ * @since 2.0.0
  */
 class KEYPLEUTIL_API Assert final {
 public:
@@ -67,7 +67,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if object is null or empty
-     * @since 2.0
+     * @since 2.0.0
      */
     Assert& notEmpty(const std::string& obj, const std::string& name);
 
@@ -78,7 +78,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if object is null or empty
-     * @since 2.0
+     * @since 2.0.0
      */
     template<typename T>
     Assert& notEmpty(const std::vector<T>& obj, const std::string& name)
@@ -97,7 +97,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if object is null or empty
-     * @since 2.0
+     * @since 2.0.0
      */
     Assert& notEmpty(const std::vector<uint8_t>& obj, const std::string& name);
 
@@ -108,7 +108,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if condition is null or false
-     * @since 2.0
+     * @since 2.0.0
      */
     Assert& isTrue(const bool condition, const std::string& name);
 
@@ -120,7 +120,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if number is null or has a value less than minValue.
-     * @since 2.0
+     * @since 2.0.0
      */
     Assert& greaterOrEqual(const int number, const int minValue, const std::string& name);
 
@@ -132,7 +132,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if number is null or has a value less than minValue.
-     * @since 2.0
+     * @since 2.0.0
      */
     Assert& isEqual(const int number, const int value, const std::string& name);
 
@@ -145,7 +145,7 @@ public:
      * @param name the object name
      * @return the current instance
      * @throw IllegalArgumentException if number is null or is out of range.
-     * @since 2.0
+     * @since 2.0.0
      */
     Assert& isInRange(const int number,
                       const int minValue,

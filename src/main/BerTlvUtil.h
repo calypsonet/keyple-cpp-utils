@@ -32,7 +32,7 @@ namespace util {
  *       #parseSimple(byte[], boolean)}).
  * </ul>
  *
- * @since 2.0
+ * @since 2.0.0
  */
 class BerTlvUtil {
 public:
@@ -51,7 +51,7 @@ public:
      * @param primitiveOnly True if only primitives tags are to be placed in the map.
      * @return A not null map.
      * @throw IllegalArgumentException If the parsing of the provided structure failed.
-     * @since 2.0
+     * @since 2.0.0
      */
     static std::map<int, std::vector<uint8_t>> parseSimple(const std::vector<uint8_t>& tlvStructure,
                                                            const bool primitiveOnly);
@@ -62,7 +62,7 @@ public:
      * @param tagId A positive int less than FFFFFFh.
      * @return True if the tag is constructed.
      * @throw IllegalArgumentException If the tag Id is out of range.
-     * @since 2.0
+     * @since 2.0.0
      */
     static bool isConstructed(const int tagId);
 
