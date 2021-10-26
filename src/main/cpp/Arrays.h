@@ -110,7 +110,20 @@ public:
         return vec;
     }
 
-    static bool containsAll(std::vector<std::string> a, std::vector<std::string> b)
+    template <typename T>
+    static bool contains(const std::vector<T>& a, const T b)
+    {
+        for (const auto& v : a) {
+            if (v == b) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    template <typename T>
+    static bool containsAll(std::vector<T> a, std::vector<T> b)
     {
         std::sort(a.begin(), a.end());
         std::sort(b.begin(), b.end());
@@ -118,10 +131,11 @@ public:
         return std::includes(a.begin(), a.end(), b.begin(), b.end());
     }
 
-    static bool containsOnly(const std::vector<uint8_t>& vec, const uint8_t val)
+    template <typename T>
+    static bool containsOnly(const std::vector<T>& a, const T b)
     {
-        for (const auto& v : vec) {
-            if (v != val) {
+        for (const auto& v : a) {
+            if (v != b) {
                 return false;
             }
         }
