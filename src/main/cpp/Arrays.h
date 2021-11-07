@@ -142,6 +142,17 @@ public:
 
         return true;
     }
+
+    template <typename T>
+    static int indexOf(const std::vector<T>& a, const T b)
+    {
+        auto it = std::find(a.begin(), a.end(), b);
+        if (it) {
+            return it - a.begin();
+        }
+
+        return -1;
+    }
 };
 
 }
