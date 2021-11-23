@@ -147,11 +147,57 @@ public:
     static int indexOf(const std::vector<T>& a, const T b)
     {
         auto it = std::find(a.begin(), a.end(), b);
-        if (it) {
+        if (it != a.end()) {
             return it - a.begin();
         }
 
         return -1;
+    }
+
+    template <typename T, typename U>
+    static bool addAll(std::vector<std::shared_ptr<T>>& a, const std::vector<std::shared_ptr<U>>& b)
+    {
+        if (b.size() == 0) {
+            return false;
+        }
+
+        for (const auto& u : b) {
+            a.push_back(std::dynamic_pointer_cast<T>(u));
+        }
+
+        return true;
+    }
+
+    template <typename T>
+    static void remove(std::vector<std::shared_ptr<T>>& a, const std::shared_ptr<T>& b)
+    {
+        const auto it = std::find(a.begin(), a.end(), b);
+        if (it != a.end()) {
+            /* Value is present */
+            a.erase(it);
+        }
+    }
+
+    template <typename T, typename U>
+    static bool removeAll(std::vector<std::shared_ptr<T>>& a, const std::vector<std::shared_ptr<U>>& b)
+    {
+        bool ret = false;
+
+        if (b.size() == 0) {
+            return false;
+        }
+
+        for (const auto& u : b) {
+            const auto t = std::dynamic_pointer_cast<T>(u);
+            const auto it = std::find(a.begin(), a.end(), t);
+            if (it != a.end()) {
+                /* Value is present, remove it and set ret to true */
+                a.erase(it);
+                ret = true;
+            }
+        }
+
+        return ret;
     }
 };
 

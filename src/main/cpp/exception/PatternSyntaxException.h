@@ -30,7 +30,7 @@ public:
     /**
      *
      */
-    PatternSyntaxException(const std::string& message, const std::exception cause)
+    PatternSyntaxException(const std::string& message, const std::shared_ptr<Exception> cause)
     : IllegalArgumentException(message, cause) {}
 };
 

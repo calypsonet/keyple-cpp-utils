@@ -84,6 +84,19 @@ public:
     {
         return (unsigned long long)(nanoTime() / pow(10, 6));
     }
+
+    /**
+     * 
+     */
+    template<typename T>
+    static unsigned int identityHashCode(const std::shared_ptr<T> t)
+    {
+        if (t == nullptr) {
+            return 0;
+        }
+        
+        return static_cast<int>(reinterpret_cast<unsigned long long>(t.get()));
+    }
 };
 
 }

@@ -33,4 +33,9 @@
 
 # Build directories
 build
+out
+
+# IDE files
+CMakeSettings.json
+.vs
 
