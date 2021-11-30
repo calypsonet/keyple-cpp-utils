@@ -22,17 +22,17 @@ namespace util {
  * @since 2.0.0
  */
 enum class ContactlessCardCommonProtocol {
-  /* Contactless standard */
-  ISO_14443_4,
+    /* Contactless standard */
+    ISO_14443_4,
 
-  /* Contactless NFC compliant */
-  NFC_A_ISO_14443_3A,
-  NFC_B_ISO_14443_3B,
-  NFC_F_JIS_6319_4,
-  NFC_V_ISO_15693,
+    /* Contactless NFC compliant */
+    NFC_A_ISO_14443_3A,
+    NFC_B_ISO_14443_3B,
+    NFC_F_JIS_6319_4,
+    NFC_V_ISO_15693,
 
-  /* Other contactless proprietary protocols */
-  INNOVATRON_B_PRIME_CARD
+    /* Other contactless proprietary protocols */
+    INNOVATRON_B_PRIME_CARD
 };
 
 }
