@@ -134,7 +134,7 @@ TEST(BerTlvUtilTest, parse_whenLengthIsTwoBytes_shouldValue)
     
     ASSERT_NE(it, tlvs.end());
     ASSERT_EQ(static_cast<int>(it->second.size()), 250);
-    ASSERT_TRUE(Arrays::containsOnly(it->second, 0xA5));
+    ASSERT_TRUE(Arrays::containsOnly(it->second, static_cast<uint8_t>(0xA5)));
 }
 
 TEST(BerTlvUtilTest, parse_whenLengthIsThreeBytes_shouldValue) 
@@ -154,7 +154,7 @@ TEST(BerTlvUtilTest, parse_whenLengthIsThreeBytes_shouldValue)
     const auto it = tlvs.find(0x84);
     ASSERT_NE(it, tlvs.end());
     ASSERT_EQ(static_cast<int>(it->second.size()), 260);
-    ASSERT_TRUE(Arrays::containsOnly(it->second, 0xA5));
+    ASSERT_TRUE(Arrays::containsOnly(it->second, static_cast<uint8_t>(0xA5)));
 }
 
 TEST(BerTlvUtilTest, isConstructed_when1ByteTagIsConstructed_shouldReturnTrue)

@@ -11,22 +11,6 @@
 # SPDX-License-Identifier: EPL-2.0                                                                *
 # *************************************************************************************************/
 
-PROJECT(KeypleUtil C CXX)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-
-SET(VERSION_MAJOR "2")
-SET(VERSION_MINOR "0")
-SET(VERSION_PATCH "0")
-
-SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
-
-SET(PACKAGE_NAME "KeypleUtil")
-SET(PACKAGE_VERSION ${VERSION})
-SET(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
-
-SET(CMAKE_MACOSX_RPATH 1)
-SET(CMAKE_CXX_STANDARD 11)
-
 SET(EXECUTABLE_NAME keypleutilcpplib_ut)
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DKEYPLEUTIL_EXPORT")
@@ -47,5 +31,9 @@ ADD_EXECUTABLE(
     ${CMAKE_CURRENT_SOURCE_DIR}/ByteArrayUtilTest.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/MainTest.cpp
 )
+
+# Add Google Test
+SET(GOOGLETEST_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+INCLUDE(CMakeLists.txt.googletest)
 
 TARGET_LINK_LIBRARIES(${EXECUTABLE_NAME} gtest gmock keypleutilcpplib)
