@@ -62,10 +62,14 @@ public:
      */
     friend std::ostream& operator<<(std::ostream& os, const Exception& e)
     {
-       os << "EXCEPTION: {"
-           << "MESSAGE = " << e.mMessage << ", "
-           << "CAUSE = " << e.mCause->what()
-           << "}";
+        os << "EXCEPTION: {"
+           << "MESSAGE = " << e.mMessage;
+    
+        if (e.mCause != nullptr) {
+            os << ", CAUSE = " << e.mCause->what();
+        }
+    
+        os << "}";
 
         return os;
     }
