@@ -33,6 +33,11 @@ public:
     /**
      *
      */
+    Exception(const Exception& o) : mMessage(o.mMessage), mCause(o.mCause) {}
+
+    /**
+     *
+     */
     Exception(const std::string& message) : mMessage(message), mCause(nullptr) {}
 
     /**

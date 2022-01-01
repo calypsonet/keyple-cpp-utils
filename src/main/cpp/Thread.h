@@ -13,6 +13,7 @@
 #pragma once
 
 #include <chrono>
+#include <future>
 #include <thread>
 
 namespace keyple {
@@ -32,35 +33,26 @@ public:
     /**
      * Constructor
      *
-     * Allocates a new Thread object. This constructor has the same effect as Thread (null, null,
-     * gname), where gname is a newly generated name. Automatically generated names are of the form
-     * "Thread-"+n, where n is an integer.
-     */
-    Thread()
-    : mAlive(false), mName("Thread-x"), mInterrupted(false), mThread(nullptr),
-        mDetached(true) {}
-
-    /**
-     * Constructor
-     *
      * Allocates a new Thread object. This constructor has the same effect as
      * Thread (null, null, name).
      *
      * @param name the name of the new thread
      */
-    Thread(const std::string& name)
-    : mAlive(false), mName(name), mInterrupted(false), mThread(nullptr),
-        mDetached(true) {}
+    Thread(const std::string& name) : mAlive(false), mName(name), mInterrupted(false) {}
+
+    /**
+     * Constructor
+     *
+     * Allocates a new Thread object. This constructor has the same effect as Thread (null, null,
+     * gname), where gname is a newly generated name. Automatically generated names are of the form
+     * "Thread-"+n, where n is an integer.
+     */
+    Thread() : Thread("Thread-x") {}
 
     /**
      * Destructor
      */
-    virtual ~Thread()
-    {
-        if (mAlive == 1 && mDetached == 0) {
-            mThread->detach();
-        }
-    }
+    virtual ~Thread() = default;
 
     /**
      *
@@ -83,27 +75,24 @@ public:
      */
     void start()
     {
-        int result;
-
         mInterrupted = false;
+        mDedicatedThread = true;
 
-        mThread = new std::thread(runThread, this);
-        result = mThread ? 0 : -1;
-
-        if (result == 0)
-            mAlive = 1;
+        mThread = std::async(std::launch::async, &runThread, this);
     }
 
     /**
-     * In the call to pthread_create() the last argument is a void pointer to a data structure which
-     * will be passed to the runThread() function when it is called. Since the input argument to the
-     * runThread() is the Thread class this pointer, we can cast it to a Thread pointer then use it
-     * to call the Thread::run() method. Due to polymorphism, the Thread subclass run() method will
-     * be called to carry out the thread’s action.
+     *
      */
-    static void runThread(void* arg)
+    void run()
     {
-        ((Thread*)arg)->run();
+        mAlive = true;
+        mInterrupted = false;
+        mDedicatedThread = false;
+
+        this->execute();
+
+        mAlive = false;
     }
 
     /**
@@ -116,26 +105,8 @@ public:
     {
         int result = -1;
 
-        if (mAlive == 1) {
-            mThread->join();
-            mDetached = 1;
-        }
-
-        return result;
-    }
-
-    /**
-     * This is a utility method that detaches a thread when the caller doesn’t want to wait for the
-     * thread to complete. If the thread is running and not detached, pthread_detach() is called and
-     * the thread is flagged as detached if the call is successful.
-     */
-    int detach()
-    {
-        int result = -1;
-
-        if (mAlive == 1 && mDetached == 0) {
-            mThread->detach();
-            mDetached = 1;
+        if (isAlive() == true) {
+            mThread.wait();
         }
 
         return result;
@@ -144,33 +115,14 @@ public:
     /**
      *
      */
-    bool isAlive() const
+    bool isAlive()
     {
+        /* Perform live check if dedicated thread is in use */
+        if (mDedicatedThread == true) {
+            mAlive = (mThread.wait_for(std::chrono::milliseconds(0)) != std::future_status::ready);
+        }
+
         return mAlive;
-    }
-
-    /**
-     * This is another utility method that returns the thread ID for display or logging purposes.
-     */
-    std::thread::id selfId()
-    {
-        return mThread->get_id();
-    }
-
-    /**
-     *
-     */
-    std::thread* self()
-    {
-        return mThread;
-    }
-
-    /**
-     *
-     */
-    void setDaemon(bool on)
-    {
-        (void)on;
     }
 
     /**
@@ -231,30 +183,9 @@ public:
     /**
      *
      */
-    virtual void* run() = 0;
-
-    /**
-     *
-     */
-    static std::thread::id currentThreadId()
-    {
-        return std::this_thread::get_id();
-    }
-
-    /**
-     *
-     */
     std::string getName()
     {
         return mName;
-    }
-
-    /**
-     *
-     */
-    void setThread(std::thread* t)
-    {
-        mThread = t;
     }
 
     /**
@@ -269,7 +200,7 @@ private:
     /**
      *
      */
-    int mAlive;
+    bool mAlive;
 
     /**
      *
@@ -284,17 +215,34 @@ private:
     /**
      *
      */
-    std::thread* mThread;
-
-    /**
-     *
-     */
-    int mDetached;
+    std::future<void> mThread;
 
     /**
      *
      */
     std::shared_ptr<UncaughtExceptionHandler> mUncaughtExceptionHandler;
+
+    /**
+     * 
+     */
+    bool mDedicatedThread;
+
+    /**
+     * In the call to pthread_create() the last argument is a void pointer to a data structure which
+     * will be passed to the runThread() function when it is called. Since the input argument to the
+     * runThread() is the Thread class this pointer, we can cast it to a Thread pointer then use it
+     * to call the Thread::run() method. Due to polymorphism, the Thread subclass run() method will
+     * be called to carry out the thread’s action.
+     */
+    static void runThread(void* arg)
+    {
+        ((Thread*)arg)->execute();
+    }
+
+    /**
+     * Actual function to be executed by run() and start() public methods
+     */
+    virtual void execute() = 0;
 };
 
 }
