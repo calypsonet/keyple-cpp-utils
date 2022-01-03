@@ -213,8 +213,12 @@ private:
         const std::lock_guard<std::mutex> lock(*mtx);
 
         /* Header */
-        std::printf("[%s]   [%5s]   [%-100s]   ", getCurrentTimestamp().c_str(),
-                    label.c_str(), className.c_str());
+        std::string name = className;
+        name.resize(70);
+        std::printf("[%s]   [%5s]   [%-70s]   ",
+                    getCurrentTimestamp().c_str(),
+                    label.c_str(),
+                    name.c_str());
 
         /* Actual log */
         std::ostringstream os;
