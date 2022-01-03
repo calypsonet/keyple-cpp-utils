@@ -12,25 +12,50 @@
 
 #pragma once
 
+#include <string>
+
 namespace keyple {
 namespace core {
 namespace util {
+namespace protocol {
 
 /**
  * This enum contains a non-exhaustive list of contacts smartcard communication protocols.
  *
  * @since 2.0.0
  */
-enum class ContactCardCommonProtocol {
-    /* Contact ISO standard */
-    ISO_7816_3,
-    ISO_7816_3_T0,
-    ISO_7816_3_T1,
+class ContactCardCommonProtocol {
+public:
+    /**
+     * Contact ISO standard
+     */
+    static const ContactCardCommonProtocol ISO_7816_3;
+    static const ContactCardCommonProtocol ISO_7816_3_T0;
+    static const ContactCardCommonProtocol ISO_7816_3_T1;
 
-    /* Contact proprietary old Calypso SAM */
-    INNOVATRON_HIGH_SPEED_PROTOCOL_SAM
+    /**
+     * Contact proprietary old Calypso SAM
+     */
+    static const ContactCardCommonProtocol INNOVATRON_HIGH_SPEED_PROTOCOL_SAM;
+
+    /**
+     *
+     */
+    const std::string& getName() const;
+
+private:
+    /**
+     *
+     */
+    const std::string mName;
+
+    /**
+     *
+     */
+    ContactCardCommonProtocol(const std::string& name);
 };
 
+}
 }
 }
 }

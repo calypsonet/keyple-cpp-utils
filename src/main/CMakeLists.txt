@@ -50,4 +50,6 @@ ADD_LIBRARY(
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/LoggerFactory.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/Matcher.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/cpp/Pattern.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/protocol/ContactCardCommonProtocol.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/protocol/ContactlessCardCommonProtocol.cpp
 )

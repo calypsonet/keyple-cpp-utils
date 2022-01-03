@@ -10,52 +10,33 @@
  * SPDX-License-Identifier: EPL-2.0                                                               *
  **************************************************************************************************/
 
-#pragma once
-
-#include <string>
+#include "ContactlessCardCommonProtocol.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace protocol {
 
-/**
- * This enum contains a non-exhaustive list of contactless smartcard communication protocols.
- *
- * @since 2.0.0
- */
-class ContactlessCardCommonProtocol {
-public:
-    /**
-     * Contactless standard
-     */
-    static const ContactlessCardCommonProtocol ISO_14443_4;
+const ContactlessCardCommonProtocol ContactlessCardCommonProtocol::ISO_14443_4(
+    "ISO_14443_4");
+const ContactlessCardCommonProtocol ContactlessCardCommonProtocol::NFC_A_ISO_14443_3A(
+    "NFC_A_ISO_14443_3A");
+const ContactlessCardCommonProtocol ContactlessCardCommonProtocol::NFC_B_ISO_14443_3B(
+    "NFC_B_ISO_14443_3B");
+const ContactlessCardCommonProtocol ContactlessCardCommonProtocol::NFC_F_JIS_6319_4(
+    "NFC_F_JIS_6319_4");
+const ContactlessCardCommonProtocol ContactlessCardCommonProtocol::NFC_V_ISO_15693(
+    "NFC_V_ISO_15693");
+const ContactlessCardCommonProtocol ContactlessCardCommonProtocol::INNOVATRON_B_PRIME_CARD(
+    "INNOVATRON_B_PRIME_CARD");
 
-    /* Contactless NFC compliant */
-    static const ContactlessCardCommonProtocol NFC_A_ISO_14443_3A;
-    static const ContactlessCardCommonProtocol NFC_B_ISO_14443_3B;
-    static const ContactlessCardCommonProtocol NFC_F_JIS_6319_4;
-    static const ContactlessCardCommonProtocol NFC_V_ISO_15693;
+ContactlessCardCommonProtocol::ContactlessCardCommonProtocol(const std::string& name)
+: mName(name) {}
 
-    /* Other contactless proprietary protocols */
-    static const ContactlessCardCommonProtocol INNOVATRON_B_PRIME_CARD;
-
-    /**
-     *
-     */
-    const std::string& getName() const;
-
-private:
-    /**
-     *
-     */
-    const std::string mName;
-
-    /**
-     *
-     */
-    ContactlessCardCommonProtocol(const std::string& name);
-};
+const std::string& ContactlessCardCommonProtocol::getName() const
+{
+    return mName;
+}
 
 }
 }

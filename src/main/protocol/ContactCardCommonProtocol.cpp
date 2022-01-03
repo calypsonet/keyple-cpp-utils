@@ -10,52 +10,28 @@
  * SPDX-License-Identifier: EPL-2.0                                                               *
  **************************************************************************************************/
 
-#pragma once
-
-#include <string>
+#include "ContactCardCommonProtocol.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace protocol {
 
-/**
- * This enum contains a non-exhaustive list of contactless smartcard communication protocols.
- *
- * @since 2.0.0
- */
-class ContactlessCardCommonProtocol {
-public:
-    /**
-     * Contactless standard
-     */
-    static const ContactlessCardCommonProtocol ISO_14443_4;
+const ContactCardCommonProtocol ContactCardCommonProtocol::ISO_7816_3(
+    "ISO_7816_3");
+const ContactCardCommonProtocol ContactCardCommonProtocol::ISO_7816_3_T0(
+    "ISO_7816_3_T0");
+const ContactCardCommonProtocol ContactCardCommonProtocol::ISO_7816_3_T1(
+    "ISO_7816_3_T1");
+const ContactCardCommonProtocol ContactCardCommonProtocol::INNOVATRON_HIGH_SPEED_PROTOCOL_SAM(
+    "INNOVATRON_HIGH_SPEED_PROTOCOL_SAM");
 
-    /* Contactless NFC compliant */
-    static const ContactlessCardCommonProtocol NFC_A_ISO_14443_3A;
-    static const ContactlessCardCommonProtocol NFC_B_ISO_14443_3B;
-    static const ContactlessCardCommonProtocol NFC_F_JIS_6319_4;
-    static const ContactlessCardCommonProtocol NFC_V_ISO_15693;
+ContactCardCommonProtocol::ContactCardCommonProtocol(const std::string& name) : mName(name) {}
 
-    /* Other contactless proprietary protocols */
-    static const ContactlessCardCommonProtocol INNOVATRON_B_PRIME_CARD;
-
-    /**
-     *
-     */
-    const std::string& getName() const;
-
-private:
-    /**
-     *
-     */
-    const std::string mName;
-
-    /**
-     *
-     */
-    ContactlessCardCommonProtocol(const std::string& name);
-};
+const std::string& ContactCardCommonProtocol::getName() const
+{
+    return mName;
+}
 
 }
 }
