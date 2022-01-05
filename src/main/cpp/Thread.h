@@ -26,9 +26,7 @@ public:
     /**
      *
      */
-    class UncaughtExceptionHandler {
-
-    };
+    class UncaughtExceptionHandler {};
 
     /**
      * Constructor
@@ -38,7 +36,8 @@ public:
      *
      * @param name the name of the new thread
      */
-    Thread(const std::string& name) : mAlive(false), mName(name), mInterrupted(false) {}
+    Thread(const std::string& name)
+    : mDone(false), mAlive(false), mName(name), mInterrupted(false), mDedicatedThread(false) {}
 
     /**
      * Constructor
@@ -75,7 +74,7 @@ public:
      */
     void start()
     {
-        mInterrupted = false;
+        mAlive = true;
         mDedicatedThread = true;
 
         mThread = std::async(std::launch::async, &runThread, this);
@@ -87,12 +86,11 @@ public:
     void run()
     {
         mAlive = true;
-        mInterrupted = false;
-        mDedicatedThread = false;
 
         this->execute();
 
         mAlive = false;
+        mDone = true;
     }
 
     /**
@@ -196,6 +194,12 @@ public:
         mUncaughtExceptionHandler = eh;
     }
 
+protected:
+    /**
+     *
+     */
+    bool mDone;
+
 private:
     /**
      *
@@ -223,7 +227,7 @@ private:
     std::shared_ptr<UncaughtExceptionHandler> mUncaughtExceptionHandler;
 
     /**
-     * 
+     *
      */
     bool mDedicatedThread;
 
