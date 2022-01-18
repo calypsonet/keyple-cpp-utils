@@ -1,6 +1,5 @@
 # *************************************************************************************************
-# Copyright (c) 2021 Calypso Networks Association                                                 *
-# https://www.calypsonet-asso.org/                                                                *
+# Copyright (c) 2021 Calypso Networks Association http://calypsonet.org/                          *
 #                                                                                                 *
 # See the NOTICE file(s) distributed with this work for additional information regarding          *
 # copyright ownership.                                                                            *
@@ -10,22 +9,6 @@
 #                                                                                                 *
 # SPDX-License-Identifier: EPL-2.0                                                                *
 # *************************************************************************************************/
-
-PROJECT(KeypleUtilCppLib C CXX)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-
-SET(VERSION_MAJOR "2")
-SET(VERSION_MINOR "0")
-SET(VERSION_PATCH "0")
-
-SET(VERSION "${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH}")
-
-SET(PACKAGE_NAME "KeypleUtilCppLib")
-SET(PACKAGE_VERSION ${VERSION})
-SET(PACKAGE_STRING "${PACKAGE_NAME} ${PACKAGE_VERSION}")
-
-SET(CMAKE_MACOSX_RPATH 1)
-SET(CMAKE_CXX_STANDARD 11)
 
 SET(LIBRARY_NAME keypleutilcpplib)
 
