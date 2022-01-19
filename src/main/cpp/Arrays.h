@@ -148,7 +148,7 @@ public:
     {
         auto it = std::find(a.begin(), a.end(), b);
         if (it != a.end()) {
-            return it - a.begin();
+            return static_cast<int>(it - a.begin());
         }
 
         return -1;

@@ -15,6 +15,9 @@
 #include <cstdint>
 #include <vector>
 
+/* Keyple Core Util */
+#include "KeypleUtilExport.h"
+
 namespace keyple {
 namespace core {
 namespace util {
@@ -24,7 +27,7 @@ namespace util {
  *
  * @since 2.0.0
  */
-class ApduUtil final {
+class KEYPLEUTIL_API ApduUtil final {
 public:
     /**
      * Builds an APDU request from its elements as defined by the ISO 7816 standard.

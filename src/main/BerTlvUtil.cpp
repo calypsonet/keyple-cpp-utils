@@ -32,6 +32,7 @@ std::map<int, std::vector<uint8_t>> BerTlvUtil::parseSimple(
     try {
         return parseBuffer(tlvStructure, primitiveOnly);
     } catch (const IndexOutOfBoundsException& e) {
+        (void)e;
         throw IllegalArgumentException("Invalid TLV structure.");
     }
 }

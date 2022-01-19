@@ -14,6 +14,9 @@
 
 #include <string>
 
+/* Keyple Core Util */
+#include "KeypleUtilExport.h"
+
 namespace keyple {
 namespace core {
 namespace util {
@@ -24,7 +27,7 @@ namespace protocol {
  *
  * @since 2.0.0
  */
-class ContactCardCommonProtocol {
+class KEYPLEUTIL_API ContactCardCommonProtocol {
 public:
     /**
      * Contact ISO standard
