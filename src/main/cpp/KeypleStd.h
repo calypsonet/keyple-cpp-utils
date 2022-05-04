@@ -87,23 +87,9 @@ inline std::ostream& operator<<(std::ostream& os, const std::set<std::string>& s
     return os;
 }
 
+template<class A, class B>
 inline
-std::ostream& operator<<(std::ostream& os, const std::map<const std::string, const std::string>& s)
-{
-    os << "MAP: {";
-    for (auto it = s.begin(); it != s.end(); ++it)
-    {
-        if (it != s.begin())
-            os << ", ";
-        os << "{" << it->first << ", " << it->second << "}";
-    }
-    os << "}";
-
-    return os;
-}
-
-inline
-std::ostream& operator<<(std::ostream& os, const std::map<std::string, std::string>& s)
+std::ostream& operator<<(std::ostream& os, const std::map<A, B>& s)
 {
     os << "MAP: {";
     for (auto it = s.begin(); it != s.end(); ++it)

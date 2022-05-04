@@ -10,47 +10,37 @@
  * SPDX-License-Identifier: EPL-2.0                                                               *
  **************************************************************************************************/
 
-#include "Pattern.h"
+#pragma once
 
-/* Keyple Core Utils */
-#include "PatternSyntaxException.h"
+#include "RuntimeException.h"
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
+namespace exception {
 
-using namespace keyple::core::util::cpp::exception;
+class UnsupportedOperationException : public RuntimeException {
+public:
+    /**
+     *
+     */
+    UnsupportedOperationException() : RuntimeException() {}
 
-Pattern::Pattern(const std::string& pattern, const int flags) : mPattern(pattern), mFlags(flags) {}
+    /**
+     *
+     */
+    UnsupportedOperationException(const std::string& message) : RuntimeException(message) {}
 
-std::unique_ptr<Pattern> Pattern::compile(const std::string& regularExpression, const int flags)
-    const
-{
-    /* Compiler hack */
-    (void)mFlags;
+    /**
+     *
+     */
+    UnsupportedOperationException(const std::string& message,
+                                  const std::shared_ptr<Exception> cause)
+    : RuntimeException(message, cause) {}
+};
 
-    try {
-        return std::unique_ptr<Pattern>(new Pattern(regularExpression, flags));
-    } catch (const std::exception& e) {
-        throw PatternSyntaxException(e.what());
-    }
 }
-
-std::unique_ptr<Pattern> Pattern::compile(const std::string& pattern)
-{
-    try {
-        return std::unique_ptr<Pattern>(new Pattern(pattern, 0));
-    } catch (const std::exception& e) {
-        throw PatternSyntaxException(e.what());
-    }
-}
-
-std::unique_ptr<Matcher> Pattern::matcher(const std::string& input) const
-{
-    return std::unique_ptr<Matcher>(new Matcher(this, input));
-}
-
 }
 }
 }

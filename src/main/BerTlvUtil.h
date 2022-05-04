@@ -18,7 +18,7 @@
 namespace keyple {
 namespace core {
 namespace util {
-    
+
 /**
  * Helper class to decode BER-TLV encoded data.
  *
@@ -53,8 +53,8 @@ public:
      * @throw IllegalArgumentException If the parsing of the provided structure failed.
      * @since 2.0.0
      */
-    static std::map<int, std::vector<uint8_t>> parseSimple(const std::vector<uint8_t>& tlvStructure,
-                                                           const bool primitiveOnly);
+    static const std::map<const int, const std::vector<uint8_t>> parseSimple(
+        const std::vector<uint8_t>& tlvStructure, const bool primitiveOnly);
 
     /**
      * Indicates if the provided tag ID corresponds to a constructed tag.
@@ -81,7 +81,7 @@ private:
      * @param primitiveOnly True if only primitives tags are to be placed in the map.
      * @return A not null map.
      */
-    static const std::map<int, std::vector<uint8_t>> parseBuffer(
+    static const std::map<const int, const std::vector<uint8_t>> parseBuffer(
         const std::vector<uint8_t> tlvStructure, const bool primitiveOnly);
 
     /**
@@ -132,8 +132,8 @@ private:
      * @throw IllegalArgumentException If the size is wrong.
      * @throw IndexOutOfBoundsException If offset is out of range for the provided tlvStructure.
      */
-    static int getLength(const std::vector<uint8_t>& tlvStructure, 
-                         const int offset, 
+    static int getLength(const std::vector<uint8_t>& tlvStructure,
+                         const int offset,
                          const int size);
 };
 

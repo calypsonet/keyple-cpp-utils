@@ -28,9 +28,6 @@ namespace cpp {
 using namespace keyple::core::util::cpp::exception;
 
 class Arrays {
-private:
-    std::vector<char> privateArray;
-
 public:
     static bool equals(const std::vector<char>& a1, const std::vector<char>& a2)
     {
@@ -198,6 +195,14 @@ public:
         }
 
         return ret;
+    }
+
+    template <typename T>
+    static void fill(std::vector<T>& a, int from_Index, int to_Index, T val)
+    {
+        for (int i = from_Index; i < to_Index; i++) {
+            a[i] = val;
+        }
     }
 };
 

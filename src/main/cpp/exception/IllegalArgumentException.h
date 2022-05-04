@@ -20,6 +20,8 @@ namespace util {
 namespace cpp {
 namespace exception {
 
+using namespace keyple::core::util::cpp::exception;
+
 class IllegalArgumentException : public Exception {
 public:
     /**

@@ -26,7 +26,7 @@ using namespace keyple::core::util::cpp::exception;
 
 BerTlvUtil::BerTlvUtil() {}
 
-std::map<int, std::vector<uint8_t>> BerTlvUtil::parseSimple(
+const std::map<const int, const std::vector<uint8_t>> BerTlvUtil::parseSimple(
     const std::vector<uint8_t>& tlvStructure, const bool primitiveOnly)
 {
     try {
@@ -42,11 +42,11 @@ bool BerTlvUtil::isConstructed(const int tagId)
     if (tagId < 0 || tagId > 0xFFFFFF) {
         throw IllegalArgumentException("Tag Id out of range.");
     }
-    
+
     if (tagId <= 0xFF) {
         return (tagId & 0x20) != 0;
     }
-    
+
     if (tagId <= 0xFFFF) {
         return (tagId & 0x2000) != 0;
     }
@@ -54,15 +54,15 @@ bool BerTlvUtil::isConstructed(const int tagId)
     return (tagId & 0x200000) != 0;
 }
 
-const std::map<int, std::vector<uint8_t>> BerTlvUtil::parseBuffer(
+const std::map<const int, const std::vector<uint8_t>> BerTlvUtil::parseBuffer(
     const std::vector<uint8_t> tlvStructure, const bool primitiveOnly)
 {
     int offset = 0;
-    std::map<int, std::vector<uint8_t>> tlvs;
+    std::map<const int, const std::vector<uint8_t>> tlvs;
 
     do {
         const int tagSize = getTagSize(tlvStructure, offset);
-        const std::vector<uint8_t> tagBytes = 
+        const std::vector<uint8_t> tagBytes =
             Arrays::copyOfRange(tlvStructure, offset, offset + tagSize);
         const int tag = getTag(tlvStructure, offset, tagSize);
         const int lengthSize = getLengthSize(tlvStructure, offset + tagSize);
@@ -71,16 +71,17 @@ const std::map<int, std::vector<uint8_t>> BerTlvUtil::parseBuffer(
             Arrays::copyOfRange(tlvStructure,
                                 offset + tagSize + lengthSize,
                                 offset + tagSize + lengthSize + valueSize);
-        
+
         offset += tagSize + lengthSize + valueSize;
-        
+
         if ((tagBytes[0] & 0x20) != 0) {
             /* Tag is constructed */
             if (!primitiveOnly) {
                 tlvs.insert({tag, value});
             }
 
-            const std::map<int, std::vector<uint8_t>> parse = parseSimple(value, primitiveOnly);
+            const std::map<const int, const std::vector<uint8_t>> parse =
+                parseSimple(value, primitiveOnly);
             tlvs.insert(parse.begin(), parse.end());
         } else {
             /* Tag is primitive */
@@ -106,7 +107,7 @@ int BerTlvUtil::getTagSize(const std::vector<uint8_t>& tlvStructure, const int o
                 throw IllegalArgumentException("Invalid tag.");
             }
         }
-        
+
         return 3;
     } else {
         return 1;
@@ -129,7 +130,7 @@ int BerTlvUtil::getTag(const std::vector<uint8_t>& tlvStructure, const int offse
     }
 }
 
-int BerTlvUtil::getLengthSize(const std::vector<uint8_t>& tlvStructure, const int offset) 
+int BerTlvUtil::getLengthSize(const std::vector<uint8_t>& tlvStructure, const int offset)
 {
     int firstByteLength = tlvStructure[offset] & 0xff;
 
@@ -147,8 +148,8 @@ int BerTlvUtil::getLengthSize(const std::vector<uint8_t>& tlvStructure, const in
     }
 }
 
-int BerTlvUtil::getLength(const std::vector<uint8_t>& tlvStructure, 
-                          const int offset, 
+int BerTlvUtil::getLength(const std::vector<uint8_t>& tlvStructure,
+                          const int offset,
                           const int size)
 {
     switch (size) {

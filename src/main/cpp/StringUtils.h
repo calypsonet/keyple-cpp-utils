@@ -10,46 +10,35 @@
  * SPDX-License-Identifier: EPL-2.0                                                               *
  **************************************************************************************************/
 
-#include "Pattern.h"
+#pragma once
 
-/* Keyple Core Utils */
-#include "PatternSyntaxException.h"
+#include <cstdarg>
+#include <string>
 
 namespace keyple {
 namespace core {
 namespace util {
 namespace cpp {
 
-using namespace keyple::core::util::cpp::exception;
+class StringUtils {
+public:
+    static inline const std::string format(const std::string& format, ...)
+    {
+        char buf[1024];
+        va_list args;
 
-Pattern::Pattern(const std::string& pattern, const int flags) : mPattern(pattern), mFlags(flags) {}
+        va_start(args, format);
+        vsprintf(buf, format.c_str(), args);
+        va_end(args);
 
-std::unique_ptr<Pattern> Pattern::compile(const std::string& regularExpression, const int flags)
-    const
-{
-    /* Compiler hack */
-    (void)mFlags;
-
-    try {
-        return std::unique_ptr<Pattern>(new Pattern(regularExpression, flags));
-    } catch (const std::exception& e) {
-        throw PatternSyntaxException(e.what());
+        return buf;
     }
-}
 
-std::unique_ptr<Pattern> Pattern::compile(const std::string& pattern)
-{
-    try {
-        return std::unique_ptr<Pattern>(new Pattern(pattern, 0));
-    } catch (const std::exception& e) {
-        throw PatternSyntaxException(e.what());
+    static inline bool contains(const std::string& s1, const std::string& s2)
+    {
+        return s1.find(s2) != std::string::npos;
     }
-}
-
-std::unique_ptr<Matcher> Pattern::matcher(const std::string& input) const
-{
-    return std::unique_ptr<Matcher>(new Matcher(this, input));
-}
+};
 
 }
 }

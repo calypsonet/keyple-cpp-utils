@@ -10,10 +10,10 @@
  * SPDX-License-Identifier: EPL-2.0                                                               *
  **************************************************************************************************/
 
-#include "Pattern.h"
+#pragma once
 
-/* Keyple Core Utils */
-#include "PatternSyntaxException.h"
+#include <map>
+#include <vector>
 
 namespace keyple {
 namespace core {
@@ -22,34 +22,32 @@ namespace cpp {
 
 using namespace keyple::core::util::cpp::exception;
 
-Pattern::Pattern(const std::string& pattern, const int flags) : mPattern(pattern), mFlags(flags) {}
+class MapUtils {
+public:
+    template <typename K, typename V>
+    static const std::vector<K> getKeySet(const std::map<const K, const V>& m)
+    {
+        std::vector<K> v;
 
-std::unique_ptr<Pattern> Pattern::compile(const std::string& regularExpression, const int flags)
-    const
-{
-    /* Compiler hack */
-    (void)mFlags;
+        for (const auto& e : m) {
+            v.push_back(e.first);
+        }
 
-    try {
-        return std::unique_ptr<Pattern>(new Pattern(regularExpression, flags));
-    } catch (const std::exception& e) {
-        throw PatternSyntaxException(e.what());
+        return v;
     }
-}
 
-std::unique_ptr<Pattern> Pattern::compile(const std::string& pattern)
-{
-    try {
-        return std::unique_ptr<Pattern>(new Pattern(pattern, 0));
-    } catch (const std::exception& e) {
-        throw PatternSyntaxException(e.what());
+    template <typename K, typename V>
+    static const std::vector<V> getValueSet(const std::map<const K, const V>& m)
+    {
+        std::vector<V> v;
+
+        for (const auto& e : m) {
+            v.push_back(e.second);
+        }
+
+        return v;
     }
-}
-
-std::unique_ptr<Matcher> Pattern::matcher(const std::string& input) const
-{
-    return std::unique_ptr<Matcher>(new Matcher(this, input));
-}
+};
 
 }
 }
